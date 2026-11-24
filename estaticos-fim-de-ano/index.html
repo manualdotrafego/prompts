@@ -1,0 +1,59 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7 prompts de anúncio estático de fim de ano | @manualdotrafego</title><meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--l:#FF6A1A;--a:#2F5BFF;--c:#EDEDED;--p:#0E0E0E}*{box-sizing:border-box}
+body{margin:0;background:var(--p);color:var(--c);font:16px/1.55 Inter,system-ui,sans-serif}
+header,main,#gate{max-width:760px;margin:auto;padding-left:20px;padding-right:20px}
+header{padding-top:44px;padding-bottom:20px}.tag{display:inline-block;background:var(--l);color:var(--p);font:700 12px Archivo;letter-spacing:.08em;padding:6px 10px;border-radius:4px}
+h1{font:900 clamp(30px,7vw,48px)/1.05 Archivo;margin:16px 0 12px}h1 em{font-style:normal;color:var(--l)}
+.prev{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:18px 0}.prev img{width:100%;border-radius:6px;display:block;aspect-ratio:4/5;object-fit:cover}
+form{background:#171717;border:1px solid #262626;border-radius:12px;padding:20px;display:grid;gap:12px;margin-bottom:48px}
+label{font:600 14px Inter;display:grid;gap:6px}input{background:#0b0b0b;border:1px solid #333;border-radius:8px;padding:14px;color:#fff;font:16px Inter}input:focus{outline:2px solid var(--a);border-color:transparent}
+button{width:100%;background:var(--a);color:#fff;border:0;border-radius:8px;padding:15px;font:700 16px Archivo;cursor:pointer}button:disabled{opacity:.6}button.ok{background:var(--l);color:var(--p)}
+.erro{color:#ff8a8a;font-size:14px;min-height:1em;margin:0}.priv{font-size:12.5px;color:#8d8d8d;margin:0}
+.dica{background:#1a1a1a;border-left:4px solid var(--a);padding:14px 16px;border-radius:6px;font-size:15px}.dica b{color:#fff}
+main{padding-bottom:40px;display:grid;gap:28px}main[hidden]{display:none}
+.card{background:#171717;border:1px solid #262626;border-radius:12px;overflow:hidden}.card img{width:100%;height:auto;display:block}
+.body{padding:18px}.num{font:900 14px Archivo;color:var(--l)}h2{font:700 22px Archivo;margin:2px 0 12px}
+pre{white-space:pre-wrap;word-wrap:break-word;background:#0b0b0b;border:1px solid #2a2a2a;border-radius:8px;padding:14px;font:13.5px/1.55 ui-monospace,Menlo,monospace;color:#d8d8d8;max-height:260px;overflow:auto;margin:0 0 12px}
+footer{text-align:center;padding:24px 20px 48px;color:#9a9a9a;font-size:14px}footer a{color:var(--l)}
+</style></head><body>
+<header><span class="tag">PROMPTS PRONTOS</span><h1>7 formatos de anúncio estático de <em>fim de ano</em></h1>
+<p>Os mesmos prompts do Reels. Coloque seu nome e e-mail para liberar os 7 na hora.</p></header>
+<div id="gate">
+<div class="prev"><img src="img/1_manchete_jornal.jpg" alt=""><img src="img/2_email_desculpa.jpg" alt=""><img src="img/4_busca_google.jpg" alt=""><img src="img/6_notificacao_bloqueio.jpg" alt=""></div>
+<form id="f" novalidate>
+<label>Seu nome<input name="nome" autocomplete="name" required minlength="2"></label>
+<label>Seu melhor e-mail<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+<p class="erro" id="erro"></p>
+<button id="b">Liberar os 7 prompts</button>
+<p class="priv">Usamos seu e-mail só para enviar conteúdos do @manualdotrafego. Você pode sair quando quiser.</p>
+</form></div>
+<main id="lista" hidden>
+<p class="dica"><b>Como adaptar:</b> troque "Casa Bellini" pelo nome da sua marca, "panetone" pelo seu produto e ajuste preço, cupom e prazo. Mantenha a frase sobre texto em português exato: é ela que evita erro de digitação na arte.</p>
+</main>
+<footer>Feito por <a href="https://www.instagram.com/manualdotrafego/">@manualdotrafego</a></footer>
+<script>
+const API='https://srv1809067.hstgr.cloud/prompts-lead',CAMP='estaticos-fim-de-ano',K='prompts_'+CAMP;
+const ref=new URLSearchParams(location.search).get('r')||'';
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function mostra(d){const m=document.getElementById('lista');
+ d.prompts.forEach((p,i)=>{const a=document.createElement('article');a.className='card';
+  a.innerHTML=`<img src="${p.img}" alt="Exemplo: ${esc(p.titulo)}" loading="lazy" width="720" height="900"><div class="body"><span class="num">${String(i+1).padStart(2,'0')}</span><h2>${esc(p.titulo)}</h2><pre>${esc(p.prompt)}</pre><button>Copiar prompt</button></div>`;
+  const b=a.querySelector('button'),pre=a.querySelector('pre');
+  b.onclick=async()=>{try{await navigator.clipboard.writeText(p.prompt)}catch(e){const r=document.createRange();r.selectNodeContents(pre);getSelection().removeAllRanges();getSelection().addRange(r);document.execCommand('copy')}
+   b.textContent='Copiado ✓';b.classList.add('ok');setTimeout(()=>{b.textContent='Copiar prompt';b.classList.remove('ok')},1800)};
+  m.appendChild(a)});
+ document.getElementById('gate').remove();m.hidden=false;document.querySelector('header p').textContent='Copie, cole no gerador de imagem (ChatGPT, Gemini etc.) e troque a marca e o produto pelos seus.'}
+async function envia(nome,email){const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome,email,campanha:CAMP,ref})});
+ const d=await r.json();if(!d.ok)throw new Error(d.erro||'Erro');return d}
+const f=document.getElementById('f'),b=document.getElementById('b'),er=document.getElementById('erro');
+f.onsubmit=async e=>{e.preventDefault();er.textContent='';const nome=f.nome.value.trim(),email=f.email.value.trim();
+ if(nome.length<2){er.textContent='Coloque seu nome.';return}if(!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)){er.textContent='Confira seu e-mail.';return}
+ b.disabled=true;b.textContent='Liberando...';
+ try{const d=await envia(nome,email);localStorage.setItem(K,JSON.stringify({nome,email}));mostra(d)}
+ catch(x){er.textContent=x.message==='Failed to fetch'?'Falha de conexão, tente de novo.':x.message;b.disabled=false;b.textContent='Liberar os 7 prompts'}};
+try{const s=JSON.parse(localStorage.getItem(K)||'null');if(s)envia(s.nome,s.email).then(mostra).catch(()=>{})}catch(e){}
+</script>
+</body></html>
